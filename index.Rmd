@@ -1,0 +1,60 @@
+---
+title: "Developing Data Products Pitch"
+author: "Martin Halwachs"
+date: "6 August 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## The Idea
+Many people have problems understanding various topics in mathematics. To start off, we will show you an important topic within functional theory: The polynomial.
+
+One main property of polynomials is the order `n`.
+
+So view the following plot to see and understand the differences in polynomial order.
+
+## Orders of polynomials
+```{r, warning=FALSE, error=FALSE}
+library(ggplot2)
+x <- seq(from=-1,to=1,by=0.01)
+df <- data.frame(x=rep(x,11))
+df$y <- unlist(lapply(0:10, function(n){x^n}),recursive=FALSE)
+df$order <- as.factor(rep(0:10, each=length(x)))
+p <- ggplot(data=df, aes(x=x, y=y, color=order))
+p <- p + geom_hline(yintercept=0)
+p <- p + geom_vline(xintercept=0)
+p <- p + geom_line()
+p <- p + scale_y_continuous(limits=c(-1,1))
+p <- p + scale_x_continuous(limits=c(-1,1))
+p
+```
+
+## Code for the plot
+```{r, eval=FALSE, echo=TRUE}
+library(ggplot2)
+x <- seq(from=-1,to=1,by=0.01)
+df <- data.frame(x=rep(x,11))
+df$y <- unlist(lapply(0:10, function(n){x^n}),recursive=FALSE)
+df$order <- as.factor(rep(0:10, each=length(x)))
+p <- ggplot(data=df, aes(x=x, y=y, color=order))
+p <- p + geom_hline(yintercept=0)
+p <- p + geom_vline(xintercept=0)
+p <- p + geom_line()
+p <- p + scale_y_continuous(limits=c(-1,1))
+p <- p + scale_x_continuous(limits=c(-1,1))
+p
+```
+
+## Interactive Application
+
+Does this plot look complicate?
+
+Are you frustrated by the lack of overview?
+
+Luckily there is now an application providing the overview you need. Check out our new easy to use application at:
+
+https://mjhalwa.shinyapps.io/coursera-developingdataproducts-courseproject/
+
